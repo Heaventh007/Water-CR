@@ -201,7 +201,6 @@
     <Compile Include="Water_CR\Register.Designer.cs">
       <DependentUpon>Register.cs</DependentUpon>
     </Compile>
-    <Compile Include="XRPC.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
