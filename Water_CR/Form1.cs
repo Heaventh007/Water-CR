@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -26,10 +26,8 @@ using Imaging.DDSReader;
 using JRPC_Client;
 using Leaf.xNet;
 using Newtonsoft.Json.Linq;
-using SafeGuard;
 using Water_CR.Properties;
 using XDevkit;
-using XRPCLib;
 
 namespace Water_CR
 {
@@ -3429,14 +3427,10 @@ namespace Water_CR
 			}
 		}
 
-        XRPC xbConsole = new XRPC();
-
 		private void simpleButton211_Click(object sender, EventArgs e)
 		{
 			if (Console.Connect(out Console))
 			{
-                xbConsole.Connect();
-
                 simpleButton211.Text = "Re-Connect To Console";
 				simpleButton211.ForeColor = Color.White;
 				Console.XNotify("Welcome '" + Encoding.BigEndianUnicode.GetString(Console.GetMemory(0x81AA28FC, 0x1E)).Trim().Trim(new char[1]) + "' To Water CR!\nTime Left: " + "Gozno"/*Auth.GG_Winform_Example.User.Expiry*/);
@@ -3565,25 +3559,24 @@ namespace Water_CR
 
 		private void simpleButton201_Click(object sender, EventArgs e)
 		{
-            MessageBox.Show("Removed by Heaventh, this is broken.");
-                                    //Array.Clear(SMCMessage, 0, SMCMessage.Length);
-                                    //SMCMessage[0] = 0x94;
-                                    //bool flag = zoomTrackBarControl2.Value < 45;
-                                    //if (flag)
-                                    //{
-                                    //	SMCMessage[1] = 127;
-                                    //}
-                                    //else
-                                    //{
-                                    //	byte b = Convert.ToByte(zoomTrackBarControl2.Value);
-                                    //    SMCMessage[1] = b;
-                                    //}
-                                    //
-                                    //Console.Call<uint>(Console.ResolveFunction("xboxkrnl.exe", 41), SMCMessage);
-                                    //SMCMessage[0] = 0x89;
-                                    //object[] array2 = new object[2];
-                                    //array2[0] = SMCMessage;
-                                    //Console.Call<uint>(Console.ResolveFunction("xboxkrnl.exe", 41), array2);
+             Array.Clear(SMCMessage, 0, SMCMessage.Length);
+             SMCMessage[0] = 0x94;
+             bool flag = zoomTrackBarControl2.Value < 45;
+             if (flag)
+             {
+             	SMCMessage[1] = 127;
+             }
+             else
+             {
+             	byte b = Convert.ToByte(zoomTrackBarControl2.Value);
+                 SMCMessage[1] = b;
+             }
+             
+             Console.Call<uint>(Console.ResolveFunction("xboxkrnl.exe", 41), SMCMessage);
+             SMCMessage[0] = 0x89;
+             object[] array2 = new object[2];
+             array2[0] = SMCMessage;
+             Console.Call<uint>(Console.ResolveFunction("xboxkrnl.exe", 41), array2);
         }
 
 		private void zoomTrackBarControl2_EditValueChanged(object sender, EventArgs e)
